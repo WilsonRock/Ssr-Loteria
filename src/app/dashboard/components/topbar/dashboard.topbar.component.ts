@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { DashboardService } from '../../service/dashboard.service';
+import { DashboardService } from '../../services/dashboard.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'dashboard-topbar',
@@ -15,5 +16,15 @@ export class DashboardTopbarComponent {
   @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
   @ViewChild('topbarmenu') menu!: ElementRef;
 
-  constructor(public layoutService: DashboardService) { }
+  constructor(public layoutService: DashboardService, private authService: AuthService) {
+    this.items = [
+      { label: 'Pefil', icon: 'pi pi-user-edit', routerLink: ['/profile'] },
+      { separator: true },
+      { label: 'Logout', icon: 'pi pi-sign-out', command: () => { this.logout() } }
+    ];
+  }
+
+  logout() {
+    this.authService.logout()
+  }
 }

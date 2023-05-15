@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { MenuService } from '../../service/menu.service';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

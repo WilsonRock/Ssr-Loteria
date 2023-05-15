@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'auth-login',
@@ -8,7 +10,19 @@ import { Component } from '@angular/core';
 export class LoginComponent {
 
   valCheck: string[] = ['remember'];
-  password!: string;
+  loading: boolean = false;
+  email: string = 'test@gisoft.co';
+  password: string = 'Abcd.1234';
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
+
+  login(): void {
+    this.loading = true;
+
+    setTimeout(() => {
+      this.authService.login(this.email, this.password)
+      this.router.navigate(['/'])
+      this.loading = false;
+    }, 1000);
+  }
 }

@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { DashboardSidebarComponent } from "../components/sidebar/dashboard.sidebar.component";
 import { DashboardTopbarComponent } from '../components/topbar/dashboard.topbar.component';
-import { DashboardService } from '../service/dashboard.service';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'dashboard-layout',
