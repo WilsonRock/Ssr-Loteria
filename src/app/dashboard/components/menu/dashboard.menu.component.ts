@@ -1,6 +1,4 @@
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
-import { DashboardService } from '../../service/dashboard.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'dashboard-menu',
@@ -11,20 +9,10 @@ export class DashboardMenuComponent implements OnInit {
 
 	model: any[] = [];
 
-	constructor(public layoutService: DashboardService) { }
+	constructor() { }
 
 	ngOnInit() {
 		this.model = [
-			{
-				label: 'Home',
-				items: [
-					{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
-					{ label: 'Ventas', icon: 'pi pi-fw pi-money-bill', routerLink: ['/sales'] },
-					{ label: 'Usuarios', icon: 'pi pi-fw pi-users', routerLink: ['/users'] },
-					{ label: 'Configuración', icon: 'pi pi-fw pi-cog', routerLink: ['/config'] }
-
-				]
-			},
 			{
 				label: 'Páginas',
 				icon: 'pi pi-fw pi-briefcase',

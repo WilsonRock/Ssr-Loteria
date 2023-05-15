@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthRoutingModule } from './auth-routing.module';
-import { PasswordModule } from 'primeng/password';
-import { LoginComponent } from './pages/login/login.component';
+
+import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
 
-
+import { AuthRoutingModule } from './auth-routing.module';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [

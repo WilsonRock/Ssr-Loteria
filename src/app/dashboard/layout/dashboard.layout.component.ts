@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { Component, Renderer2, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { DashboardSidebarComponent } from "../components/sidebar/dashboard.sidebar.component";
@@ -12,13 +12,10 @@ import { DashboardService } from '../service/dashboard.service';
 })
 export class DashboardLayoutComponent {
   overlayMenuOpenSubscription: Subscription;
-
   menuOutsideClickListener: any;
-
   profileMenuOutsideClickListener: any;
 
   @ViewChild(DashboardSidebarComponent) appSidebar!: DashboardSidebarComponent;
-
   @ViewChild(DashboardTopbarComponent) appTopbar!: DashboardTopbarComponent;
 
   constructor(public layoutService: DashboardService, public renderer: Renderer2, public router: Router) {

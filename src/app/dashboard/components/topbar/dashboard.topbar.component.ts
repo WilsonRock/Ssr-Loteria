@@ -12,9 +12,7 @@ export class DashboardTopbarComponent {
   items!: MenuItem[];
 
   @ViewChild('menubutton') menuButton!: ElementRef;
-
   @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
-
   @ViewChild('topbarmenu') menu!: ElementRef;
 
   constructor(public layoutService: DashboardService) { }

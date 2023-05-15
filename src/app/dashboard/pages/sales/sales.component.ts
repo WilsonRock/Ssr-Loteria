@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import { Customer, Representative } from 'src/app/template/demo/api/customer';
 
 @Component({
   selector: 'app-sales',
@@ -8,9 +7,9 @@ import { Customer, Representative } from 'src/app/template/demo/api/customer';
   styleUrls: ['./sales.component.scss']
 })
 export class SalesComponent {
-  customers1: Customer[] = [];
+  customers1 = [];
   loading: boolean = false;
-  representatives: Representative[] = [];
+  representatives = [];
   statuses: any[] = [];
   activityValues: number[] = [0, 100];
   @ViewChild('filter') filter!: ElementRef;
