@@ -7,7 +7,7 @@ import { ConfigComponent } from './pages/config/config.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent
   },
   {

@@ -14,25 +14,50 @@ export class DashboardMenuComponent implements OnInit {
 	ngOnInit() {
 		this.model = [
 			{
-				label: 'Páginas',
-				icon: 'pi pi-fw pi-briefcase',
+				label: 'Comercios',
 				items: [
 					{
-						label: 'Auth',
-						icon: 'pi pi-fw pi-user',
+						label: 'Gisoft',
+						icon: 'pi pi-fw pi-building',
+						routerLink: ['/notfound'],
 						items: [
 							{
-								label: 'Login',
-								icon: 'pi pi-fw pi-sign-in',
-								routerLink: ['/auth/login']
+								label: 'Comercio 1',
+								icon: 'pi pi-fw pi-briefcase',
+								items: [
+									{
+										label: 'Comercio 1.1',
+										icon: 'pi pi-fw pi-briefcase'
+									}
+								]
+							},{
+								label: 'Comercio 2',
+								icon: 'pi pi-fw pi-briefcase',
+								items: [
+									{
+										label: 'Comercio 2.1',
+										icon: 'pi pi-fw pi-briefcase',
+										items: [
+											{
+												label: 'Comercio 2.1.1',
+												icon: 'pi pi-fw pi-briefcase'
+											}
+										]
+									},
+								]
 							}
 						]
-					},
+					}
+				]
+			},
+
+			{
+				label: 'Juegos',
+				items: [
 					{
-						label: 'Not Found',
-						icon: 'pi pi-fw pi-exclamation-circle',
-						routerLink: ['/notfound']
-					},
+						label: 'Chance',
+						icon: 'pi pi-fw pi-play',
+					}
 				]
 			}
 		];

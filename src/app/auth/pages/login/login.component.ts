@@ -21,7 +21,7 @@ export class LoginComponent {
 
     setTimeout(() => {
       this.authService.login(this.email, this.password)
-      this.router.navigate(['/'])
+      this.router.navigate(['/dashboard'])
       this.loading = false;
     }, 1000);
   }

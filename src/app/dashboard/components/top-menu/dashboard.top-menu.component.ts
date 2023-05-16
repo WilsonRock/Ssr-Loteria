@@ -11,7 +11,7 @@ export class DashboardTopMenuComponent implements OnInit {
 
   ngOnInit(): void {
       this.items =[
-        { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
+        { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard'] },
         { label: 'Ventas', icon: 'pi pi-fw pi-money-bill', routerLink: ['/sales'] },
         { label: 'Usuarios', icon: 'pi pi-fw pi-users', routerLink: ['/users'] },
         { label: 'Configuración', icon: 'pi pi-fw pi-cog', routerLink: ['/config'] }
