@@ -4,6 +4,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SalesComponent } from './pages/sales/sales.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ConfigComponent } from './pages/config/config.component';
+import { GamesComponent } from './pages/games/games.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'config',
     component: ConfigComponent
+  },
+  {
+    path: 'game',
+    component: GamesComponent
   }
 ]
 

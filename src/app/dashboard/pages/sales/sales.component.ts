@@ -1,5 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Table } from 'primeng/table';
+import { Component, OnInit } from '@angular/core';
 import { ISale, ISaleTable } from '../../interfaces/sales.interface';
 import { salesDB } from '../../services/data';
 
@@ -10,9 +9,6 @@ import { salesDB } from '../../services/data';
 })
 export class SalesComponent implements OnInit {
 
-  @ViewChild('filter') filter!: ElementRef;
-
-  loading: boolean = false;
   cols: any[] = [];
   sales: ISaleTable[] = []
 
@@ -30,15 +26,6 @@ export class SalesComponent implements OnInit {
       { field: 'createdAt', header: 'Fecha' },
       { field: 'stateSale', header: 'Estado' },
     ];
-  }
-
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
-  }
-
-  clear(table: Table) {
-    table.clear();
-    this.filter.nativeElement.value = '';
   }
 
   getSales(): void {

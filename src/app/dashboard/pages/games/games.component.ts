@@ -1,23 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyDB, TimezoneDB } from '../../services/data';
-import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-config',
-  templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss']
+  selector: 'app-games',
+  templateUrl: './games.component.html',
+  styleUrls: ['./games.component.scss']
 })
-export class ConfigComponent implements OnInit {
-  name: any = 'Hernando Jurado Acevedo';
-  phone: any = 753119020;
-  email: any = 'hernandoJuradoAcevedo@jourrapide.com';
+export class GamesComponent implements OnInit {
+  name: any = 'Blanca Velázquez Batista';
   timezone: any = {name: '(UTC-05:00) Bogota, Lima, Quito', code: 'SA Pacific Standard Time'};
   timezones: any[] = [];
-  currency: any = {name: 'US Dollar', code: 'USD'};
+  currency: any = {name: 'Colombian Peso', code: 'COP'};
   currencies: any[] = [];
   loading = false;
-
-  constructor(private messageService: MessageService) {}
 
   ngOnInit() {
     this.getTimezones();
@@ -47,7 +42,6 @@ export class ConfigComponent implements OnInit {
 
     setTimeout(() => {
         this.loading = false
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Información actualizada con éxito' });
     }, 2000);
   }
 }

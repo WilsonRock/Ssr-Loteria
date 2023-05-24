@@ -14,7 +14,14 @@ export class DashboardTopMenuComponent implements OnInit {
         { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard'] },
         { label: 'Ventas', icon: 'pi pi-fw pi-money-bill', routerLink: ['/sales'] },
         { label: 'Usuarios', icon: 'pi pi-fw pi-users', routerLink: ['/users'] },
-        { label: 'Configuración', icon: 'pi pi-fw pi-cog', routerLink: ['/config'] }
+        { label: 'Configuración', icon: 'pi pi-fw pi-cog', routerLink: ['/config'] },
+        { 
+          label: 'Juegos',
+          icon: 'pi pi-fw pi-palette',
+          items: [
+            { label: 'Chance', icon: 'pi pi-fw pi-play', routerLink: ['/game'] } 
+          ]
+        }
       ]
   }
 

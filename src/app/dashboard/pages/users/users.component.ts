@@ -1,5 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Table } from 'primeng/table';
+import { Component, OnInit } from '@angular/core';
 import { usersDB } from '../../services/data';
 import { IUsersTable } from '../../interfaces/users.interface';
 
@@ -8,23 +7,13 @@ import { IUsersTable } from '../../interfaces/users.interface';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
   loading: boolean = false;
   cols: any[] = [];
   users: IUsersTable[] = [];
 
-  @ViewChild('filter') filter!: ElementRef;
-
   constructor() {}
 
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
-  }
-
-  clear(table: Table) {
-    table.clear();
-    this.filter.nativeElement.value = '';
-  }
   ngOnInit() {
     this.getUsers();
 
@@ -37,6 +26,7 @@ export class UsersComponent {
       { field: 'email', header: 'Email' },
     ];
   }
+
   getUsers() {
     usersDB.forEach((element: any) => {
       this.users.push({

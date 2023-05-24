@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
-import { ConfigComponent } from './pages/config/config.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
@@ -13,19 +12,26 @@ import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
-import { TableModule } from 'primeng/table';
 import { MenubarModule } from 'primeng/menubar';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
+import { SharedModule } from '../shared/shared.module';
 
 import { DashboardsRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardLayoutComponent } from './layout/dashboard.layout.component';
+
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardMenuComponent } from './components/menu/dashboard.menu.component';
 import { DashboardSidebarComponent } from './components/sidebar/dashboard.sidebar.component';
 import { DashboardTopbarComponent } from './components/topbar/dashboard.topbar.component';
 import { DashboardMenuItemComponent } from './components/menu-item/dashboard.menu-item.component';
+import { DashboardTopMenuComponent } from './components/top-menu/dashboard.top-menu.component';
+
+import { ConfigComponent } from './pages/config/config.component';
 import { SalesComponent } from './pages/sales/sales.component';
 import { UsersComponent } from './pages/users/users.component';
-import { DashboardTopMenuComponent } from './components/top-menu/dashboard.top-menu.component';
+import { GamesComponent } from './pages/games/games.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +45,10 @@ import { DashboardTopMenuComponent } from './components/top-menu/dashboard.top-m
     UsersComponent,
     ConfigComponent,
     DashboardTopMenuComponent,
+    GamesComponent,
   ],
   imports: [
+    SharedModule,
     ButtonModule,
     ChartModule,
     CommonModule,
@@ -54,9 +62,10 @@ import { DashboardTopMenuComponent } from './components/top-menu/dashboard.top-m
     ProgressBarModule,
     RouterModule,
     SliderModule,
-    TableModule,
-    MenubarModule
+    MenubarModule,
+    ToastModule
   ],
-  exports: [DashboardLayoutComponent]
+  exports: [DashboardLayoutComponent],
+  providers: [MessageService]
 })
 export class DashboardModule { }

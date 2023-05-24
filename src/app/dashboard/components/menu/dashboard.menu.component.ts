@@ -49,16 +49,6 @@ export class DashboardMenuComponent implements OnInit {
 						]
 					}
 				]
-			},
-
-			{
-				label: 'Juegos',
-				items: [
-					{
-						label: 'Chance',
-						icon: 'pi pi-fw pi-play',
-					}
-				]
 			}
 		];
 	}
