@@ -8,7 +8,7 @@ import { GamesComponent } from './pages/games/games.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'dashboard/:commerce',
     component: DashboardComponent
   },
   {
@@ -16,15 +16,15 @@ const routes: Routes = [
     component: SalesComponent
   },
   {
-    path: 'users',
+    path: 'sellers',
     component: UsersComponent
   },
   {
-    path: 'config',
+    path: 'config/:commerce',
     component: ConfigComponent
   },
   {
-    path: 'game',
+    path: 'game/:id',
     component: GamesComponent
   }
 ]

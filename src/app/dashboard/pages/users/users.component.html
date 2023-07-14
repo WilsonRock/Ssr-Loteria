@@ -1,7 +1,56 @@
 <div class="grid">
 	<div class="col-12">
 		<div class="card">
-      <shared-table-dynamic-colums [cols]="cols" [data]="users" [title]="'Usuarios'"></shared-table-dynamic-colums>
+      <button pButton class="absolute" (click)="showDialog()" [style]="{right: '60px', top: '165px'}" icon="pi pi-plus"></button>
+      <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+        <h5>Crear Vendedor</h5>
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="name">
+              <label for="inputtext">Nombre(s)</label>
+            </span>
+          </div>
+          <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="last_name">
+              <label for="inputnumber">Apellido(s)</label>
+            </span>
+          </div>
+          <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="dni">
+              <label for="inputtext">Documento</label>
+            </span>
+          </div>
+          <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="email">
+              <label for="inputtext">Email</label>
+            </span>
+          </div>
+          <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="password">
+              <label for="inputtext">Password</label>
+            </span>
+          </div>
+          <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="phone">
+              <label for="inputtext">Teléfono</label>
+            </span>
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <div class="flex justify-content-center">
+            <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="createSeller()" styleClass="p-button-text"></button>
+          </div>
+        </ng-template>
+      </p-dialog>
+      <shared-table-dynamic-colums [cols]="cols" [data]="users" [title]="'Vendedores'" [loading]="loading"></shared-table-dynamic-colums>
     </div>
   </div>
 </div>
+
+<p-toast position="bottom-center"></p-toast>

@@ -11,18 +11,20 @@ export class LoginComponent {
 
   valCheck: string[] = ['remember'];
   loading: boolean = false;
-  email: string = 'test@gisoft.co';
-  password: string = 'Abcd.1234';
+  email: string = '';
+  password: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
   login(): void {
     this.loading = true;
-
-    setTimeout(() => {
-      this.authService.login(this.email, this.password)
-      this.router.navigate(['/dashboard'])
+    this.authService.login(this.email.toLowerCase(), this.password).subscribe((res: any) => {
       this.loading = false;
-    }, 1000);
+      localStorage.setItem('token', res.token)
+      this.router.navigate(['/sales'])
+    }, (error: any) => {
+      this.loading = false;
+      console.error(error.error)
+    })
   }
 }

@@ -13,10 +13,10 @@ export class TableDynamicColumsComponent {
   @Input() title: string = '';
   @Input() cols: any[] = [];
   @Input() data: any[] = [];
+  @Input() loading: boolean = false;
   
   @ViewChild('filter') filter!: ElementRef;
 
-  loading: boolean = false;
 
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');

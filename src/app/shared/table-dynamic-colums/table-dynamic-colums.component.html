@@ -1,3 +1,7 @@
+<!-- <div class="flex align-items-center justify-content-between">
+	<h5 class="mb-0">{{title}}</h5>
+	<p-button icon="pi pi-plus"></p-button>
+</div> -->
 <h5>{{title}}</h5>
 <p-table #dt1 [columns]="cols" [value]="data" dataKey="id" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [rowHover]="true" [loading]="loading" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
 	<ng-template pTemplate="caption">

@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DashboardService } from '../../services/dashboard.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dashboard-topbar',
@@ -16,15 +17,18 @@ export class DashboardTopbarComponent {
   @ViewChild('topbarmenubutton') topbarMenuButton!: ElementRef;
   @ViewChild('topbarmenu') menu!: ElementRef;
 
-  constructor(public layoutService: DashboardService, private authService: AuthService) {
+  constructor(public layoutService: DashboardService, private authService: AuthService, private router: Router) {
     this.items = [
-      { label: 'Pefil', icon: 'pi pi-user-edit', routerLink: ['/profile'] },
-      { separator: true },
+      /* { label: 'Perfil', icon: 'pi pi-user-edit', routerLink: ['/profile'] },
+      { separator: true }, */
       { label: 'Logout', icon: 'pi pi-sign-out', command: () => { this.logout() } }
     ];
   }
 
   logout() {
-    this.authService.logout()
+    this.authService.logout().subscribe(() => {
+      localStorage.clear()
+      this.router.navigate(['/auth/login'])
+    })
   }
 }

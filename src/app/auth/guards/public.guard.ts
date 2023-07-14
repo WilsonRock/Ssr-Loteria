@@ -13,7 +13,7 @@ export class PublicGuard {
 
     return this.authService.checkAuthentication().pipe(
       tap( isAuthenticated => {
-        if ( isAuthenticated ) this.router.navigate(['/dashboard'])
+        if ( isAuthenticated ) this.router.navigate(['/sales'])
       }),
       map(isAuthenticated => !isAuthenticated)
     )

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ISale, ISaleTable } from '../../interfaces/sales.interface';
-import { salesDB } from '../../services/data';
+import { SalesService } from '../../services/sales.service';
 
 @Component({
   selector: 'app-sales',
@@ -10,9 +10,10 @@ import { salesDB } from '../../services/data';
 export class SalesComponent implements OnInit {
 
   cols: any[] = [];
-  sales: ISaleTable[] = []
+  sales: ISaleTable[] = [];
+  loading: boolean = false;
 
-  constructor() {}
+  constructor(private salesService: SalesService) {}
 
   ngOnInit() {
     this.getSales();
@@ -29,17 +30,21 @@ export class SalesComponent implements OnInit {
   }
 
   getSales(): void {
-    salesDB.forEach((element: ISale) => {
-      this.sales.push({
-        id: element.id,
-        name: element.commerce.name,
-        amount: element.amount,
-        prizeWon: element.prizeWon,
-        createdAt: new Date(element.createdAt).toLocaleString(),
-        betNumber: +element.betNumber,
-        stateSale: element.stateSale.description
-      })
-    });
+    this.loading = true
+    this.salesService.getSales().subscribe((res: any) => {
+      res.data.data.forEach((element: any) => {
+        this.sales.push({
+          id: element.id,
+          name: element.nombre_Vendedor + element.apellidos_Vendedor,
+          amount: element.precio,
+          prizeWon: element.premio,
+          createdAt: new Date(element.created_at).toLocaleString(),
+          betNumber: JSON.parse(element.caracteristicas)[0].numero,
+          stateSale: JSON.parse(element.caracteristicas)[0].estado
+        });
+      });
+      this.loading = false;
+    })
   }
 
 }

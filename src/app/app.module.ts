@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     DashboardModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,11 +20,12 @@
           </span>
       </div>
       <div class="field col-12 md:col-4">
-          <span class="p-float-label">
-              <p-inputNumber inputId="inputnumber" [(ngModel)]="phone" [useGrouping]="false"></p-inputNumber>
-              <label for="inputnumber">Teléfono de contacto</label>
-          </span>
-      </div>
+        <span class="p-float-label">
+            <input type="text" id="inputtext" pInputText [(ngModel)]="phone">
+            <label for="inputtext">Teléfono de contacto</label>
+        </span>
+    </div>
+
       <div class="field col-12 md:col-4">
         <span class="p-float-label">
             <input type="text" id="inputtext" pInputText [(ngModel)]="email">
@@ -33,7 +34,7 @@
     </div>
   </div>
   <div class="flex justify-content-center">
-    <button pButton label="Guardar" [loading]="loading" (click)="load()"></button>
+    <button pButton label="Guardar" [loading]="loading" (click)="updateCommerce()"></button>
   </div>
 </div>
 

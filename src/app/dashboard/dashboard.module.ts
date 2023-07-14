@@ -15,6 +15,7 @@ import { SliderModule } from 'primeng/slider';
 import { MenubarModule } from 'primeng/menubar';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -63,7 +64,8 @@ import { GamesComponent } from './pages/games/games.component';
     RouterModule,
     SliderModule,
     MenubarModule,
-    ToastModule
+    ToastModule,
+    DialogModule
   ],
   exports: [DashboardLayoutComponent],
   providers: [MessageService]
