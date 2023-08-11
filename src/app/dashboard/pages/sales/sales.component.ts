@@ -40,7 +40,7 @@ export class SalesComponent implements OnInit {
           prizeWon: element.premio,
           createdAt: new Date(element.created_at).toLocaleString(),
           betNumber: JSON.parse(element.caracteristicas)[0]?.numeros  || element.caracteristicas,
-          stateSale: JSON.parse(element.caracteristicas)[0]?.status
+          stateSale: JSON.parse(element.caracteristicas)[0]?.status || 'vendido'
         });
       });
       this.loading = false;

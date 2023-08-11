@@ -25,7 +25,7 @@ export class DashboardMenuComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.model = [
 			{
-				label: 'Comercios',
+				label: 'Sucursales',
 				items: this.commerces	 /* [
 					{
 						label: 'Gisoft',

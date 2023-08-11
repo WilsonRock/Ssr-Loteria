@@ -58,7 +58,6 @@ export class GamesComponent implements OnInit {
     this.settings = [];
     this.gamesService.getGames().subscribe((res: any) => {
       let game = res.data.filter( (game: any) => game.id == this.game_id);
-      console.log('game', game)
       this.config = JSON.parse(game[0].configuracion)
 
       Object.keys(this.config).forEach((element: any) => {

@@ -1,14 +1,14 @@
 <div class="grid">
 	<div class="col-12">
 		<div class="card">
-      <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true">
-        <h5>Asignar Boletos</h5>
-        <div class="grid p-fluid mt-3">
+      <p-dialog header="Asignar Boletos" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+        <div class="grid p-fluid mt-3" style="grid-template-columns: 1fr 1fr;">
           <div class="field col-12" *ngFor="let ticket of tikets">
             <!-- <p-toggleButton [(ngModel)]="ticket.checked" [disabled]="ticket.status == 'vendido'" [onLabel]="ticket.numeros" [offLabel]="ticket.numeros" (click)="selectTicket(ticket)"></p-toggleButton> -->
             <div class="card pointer" (click)="selectTicket(ticket)" [ngClass]="{'ticket-selected': ticket.checked, 'disabled': ticket.status == 'vendido' || ticket.status == 'asignado'}">
               <!-- <p-card> -->
-                <div class="flex justify-content-between" style="width: 70%; margin: auto;">
+                <div class="justify-content-between" style="width: 70%; margin: auto; display: grid;
+                grid-template-columns: 1fr 1fr 1fr;">
                   <div class="grid">
                     <span *ngFor="let numero of ticket.numeros">{{numero}}</span></div>
                   <div class="flex align-items-center" style="font-size: 30px;">{{ticket.sorpresa}}</div>
