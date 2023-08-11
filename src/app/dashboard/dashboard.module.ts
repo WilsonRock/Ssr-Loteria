@@ -16,6 +16,10 @@ import { MenubarModule } from 'primeng/menubar';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { CardModule } from 'primeng/card';
+import { CalendarModule } from 'primeng/calendar';
+
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -33,6 +37,9 @@ import { ConfigComponent } from './pages/config/config.component';
 import { SalesComponent } from './pages/sales/sales.component';
 import { UsersComponent } from './pages/users/users.component';
 import { GamesComponent } from './pages/games/games.component';
+import { AssignTicketComponent } from './pages/assign-ticket/assign-ticket.component';
+import { TableModule } from 'primeng/table';
+import { RafflesComponent } from './pages/raffles/raffles.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +54,8 @@ import { GamesComponent } from './pages/games/games.component';
     ConfigComponent,
     DashboardTopMenuComponent,
     GamesComponent,
+    AssignTicketComponent,
+    RafflesComponent,
   ],
   imports: [
     SharedModule,
@@ -65,7 +74,11 @@ import { GamesComponent } from './pages/games/games.component';
     SliderModule,
     MenubarModule,
     ToastModule,
-    DialogModule
+    DialogModule,
+    TableModule,
+    ToggleButtonModule,
+    CardModule,
+    CalendarModule
   ],
   exports: [DashboardLayoutComponent],
   providers: [MessageService]

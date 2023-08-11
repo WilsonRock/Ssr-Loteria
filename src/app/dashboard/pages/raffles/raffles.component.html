@@ -1,0 +1,32 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+      <button pButton class="absolute" (click)="showDialog()" [style]="{right: '60px', top: '165px'}" icon="pi pi-plus"></button>
+      <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw', height: '100vh' }" [draggable]="false" [resizable]="false" [maximizable]="true" (onMaximize)="true">
+        <h5>Crear Sorteo</h5>
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <span class="p-float-label">
+              <p-calendar [(ngModel)]="fecha_inicio" [showTime]="true" [showSeconds]="false"></p-calendar>
+              <label for="inputnumber">Fecha Inicio</label>
+            </span>
+          </div>
+          <div class="field col-12 md:col-6">
+            <span class="p-float-label">
+              <p-calendar [(ngModel)]="fecha_final" [showTime]="true" [showSeconds]="false"></p-calendar>
+              <label for="inputtext">Fecha Final</label>
+            </span>
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <div class="flex justify-content-center">
+            <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="createRaffle()" styleClass="p-button-text"></button>
+          </div>
+        </ng-template>
+      </p-dialog>
+      <shared-table-dynamic-colums [cols]="cols" [data]="raffles" [title]="'Sorteos'" [loading]="loading"></shared-table-dynamic-colums>
+    </div>
+  </div>
+</div>
+
+<p-toast position="bottom-center"></p-toast>

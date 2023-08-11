@@ -72,7 +72,7 @@ export class DashboardMenuComponent implements OnInit, OnDestroy {
 		this.dashboardService.getCommerces().subscribe((res: any) => {
 			res.data.forEach((element: any) => {
 				this.commerces.push({
-					label: element.nombre_contacto,
+					label: element.nombre,
 					icon: 'pi pi-fw pi-building',
 					routerLink: [`dashboard/${ element.id }`],
 					

@@ -20,11 +20,11 @@ export class SalesService {
     });
     
     params = {
-      size: 10,
+      size: 100,
       page: 1,
-      Type: 'venta',
+      type: 'venta',
       initial_date: '2021-01-01',
-      final_date: '2022-12-31'
+      final_date: '2023-12-31'
     }
     return this.http.get(`${ environment.api }/api/v1/ventas`, { headers: this.headers, params })
   }

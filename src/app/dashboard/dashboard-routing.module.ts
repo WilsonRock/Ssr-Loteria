@@ -5,6 +5,8 @@ import { SalesComponent } from './pages/sales/sales.component';
 import { UsersComponent } from './pages/users/users.component';
 import { ConfigComponent } from './pages/config/config.component';
 import { GamesComponent } from './pages/games/games.component';
+import { AssignTicketComponent } from './pages/assign-ticket/assign-ticket.component';
+import { RafflesComponent } from './pages/raffles/raffles.component';
 
 const routes: Routes = [
   {
@@ -24,8 +26,16 @@ const routes: Routes = [
     component: ConfigComponent
   },
   {
-    path: 'game/:id',
+    path: 'game/:id/config',
     component: GamesComponent
+  },
+  {
+    path: 'game/:id/assign-ticket',
+    component: AssignTicketComponent
+  },
+  {
+    path: 'game/:id/raffles',
+    component: RafflesComponent
   }
 ]
 

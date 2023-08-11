@@ -11,3 +11,13 @@ $gutter: 1rem; //for primeflex grid system
 /* Demos */
 @import "assets/styles/badges.scss";
 @import "assets/styles/code.scss";
+
+
+.p-datepicker table td > span {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.p-datepicker table td {
+  padding: 0;
+}

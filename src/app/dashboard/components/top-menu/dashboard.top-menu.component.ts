@@ -16,7 +16,7 @@ export class DashboardTopMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.items =[
+    this.items = [
       /* { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dashboard/1'] }, */
       { label: 'Ventas', icon: 'pi pi-fw pi-money-bill', routerLink: ['/sales'] },
       { label: 'Vendedores', icon: 'pi pi-fw pi-users', routerLink: ['/sellers'] },
@@ -35,7 +35,15 @@ export class DashboardTopMenuComponent implements OnInit {
         this.games.push({
           label: element.titulo,
           icon: 'pi pi-fw pi-play',
-          routerLink: [`/game/${ element.id }`]
+          items: element.titulo == 'Rifa' ? [
+            { label: 'Configuración',routerLink: [`/game/${ element.id }/config`]  },
+            { label: 'Asignar Boletos',routerLink: [`/game/${ element.id }/assign-ticket`] },
+            { label: 'Sorteos',routerLink: [`/game/${ element.id }/raffles`] }
+            ] : 
+            [
+              { label: 'Configuración',routerLink: [`/game/${ element.id }/config`] },
+              { label: 'Sorteos',routerLink: [`/game/${ element.id }/raffles`] }
+            ]
         })
       });
     })

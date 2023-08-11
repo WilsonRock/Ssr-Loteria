@@ -35,12 +35,12 @@ export class SalesComponent implements OnInit {
       res.data.data.forEach((element: any) => {
         this.sales.push({
           id: element.id,
-          name: element.nombre_Vendedor + element.apellidos_Vendedor,
+          name: element.vendedor_id,//element.nombre_Vendedor + element.apellidos_Vendedor,
           amount: element.precio,
           prizeWon: element.premio,
           createdAt: new Date(element.created_at).toLocaleString(),
-          betNumber: JSON.parse(element.caracteristicas)[0].numero,
-          stateSale: JSON.parse(element.caracteristicas)[0].estado
+          betNumber: JSON.parse(element.caracteristicas)[0]?.numeros  || element.caracteristicas,
+          stateSale: JSON.parse(element.caracteristicas)[0]?.status
         });
       });
       this.loading = false;

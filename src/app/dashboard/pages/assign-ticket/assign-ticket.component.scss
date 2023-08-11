@@ -1,0 +1,23 @@
+.ticket-selected {
+  background: #6366F1;
+  border-color: #6366F1;
+  color: #ffffff;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: no-drop;
+  background-color: #c5c5c5c5;
+}
+
+.grid {
+  display: grid;
+  place-items: center;
+}
+
+.filter-brightness-50 {
+  filter: brightness(50);
+}

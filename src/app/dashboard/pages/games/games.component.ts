@@ -21,20 +21,20 @@ export class GamesComponent implements OnInit {
 
   settings: any[] = [];
 
-  game_id: string = ''
+  game_id: any;
 
-  constructor(private messageService: MessageService, private gamesService: GamesService, private activatedrouter: ActivatedRoute) {
-    this.activatedrouter.params.subscribe((params: any) => {
-      this.game_id = params.id
-    });
-
-    this.getGames();
-  }
+  constructor(private messageService: MessageService, private gamesService: GamesService, private activatedrouter: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedrouter.params.subscribe((params: any) => {
+      this.game_id = params.id;
+      this.getGames();
+    });
     this.getTimezones();
     this.getCurrencies();
   }
+
+  
 
   getTimezones() {
     TimezoneDB.forEach((element: any) => {
@@ -55,10 +55,11 @@ export class GamesComponent implements OnInit {
   }
 
   getGames() {
+    this.settings = [];
     this.gamesService.getGames().subscribe((res: any) => {
       let game = res.data.filter( (game: any) => game.id == this.game_id);
-
-      this.config = JSON.parse(game[0].oportunidades)
+      console.log('game', game)
+      this.config = JSON.parse(game[0].configuracion)
 
       Object.keys(this.config).forEach((element: any) => {
         this.settings.push({key: element, ...this.config[element]})
@@ -68,7 +69,7 @@ export class GamesComponent implements OnInit {
 
   updateGame() {
     let body = {
-      oportunidades: this.config
+      configuracion: this.config
     }
     this.gamesService.updateGames(body, this.game_id ).subscribe(( res: any ) => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Información actualizada con éxito' });
