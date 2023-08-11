@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { LayoutService } from 'src/app/template/layout/service/app.layout.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'auth-login',
@@ -9,8 +10,21 @@ import { LayoutService } from 'src/app/template/layout/service/app.layout.servic
 export class LoginComponent {
 
   valCheck: string[] = ['remember'];
+  loading: boolean = false;
+  email: string = '';
+  password: string = '';
 
-  password!: string;
+  constructor(private authService: AuthService, private router: Router) { }
 
-  constructor(public layoutService: LayoutService) { }
+  login(): void {
+    this.loading = true;
+    this.authService.login(this.email.toLowerCase(), this.password).subscribe((res: any) => {
+      this.loading = false;
+      localStorage.setItem('token', res.token)
+      this.router.navigate(['/sales'])
+    }, (error: any) => {
+      this.loading = false;
+      console.error(error.error)
+    })
+  }
 }

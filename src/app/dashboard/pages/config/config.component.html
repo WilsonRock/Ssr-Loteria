@@ -3,33 +3,39 @@
   <div class="grid p-fluid mt-3">
     <div class="field col-12 md:col-6">
       <span class="p-float-label">
-          <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="cities" [(ngModel)]="value10" optionLabel="name"></p-dropdown>
+          <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="timezones" [(ngModel)]="timezone" optionLabel="name"></p-dropdown>
           <label for="dropdown">Zona Horaria</label>
       </span>
     </div>
     <div class="field col-12 md:col-6">
       <span class="p-float-label">
-          <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="cities" [(ngModel)]="value10" optionLabel="name"></p-dropdown>
+          <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="currencies" [(ngModel)]="currency" optionLabel="name"></p-dropdown>
           <label for="dropdown">Moneda</label>
       </span>
     </div>
       <div class="field col-12 md:col-4">
           <span class="p-float-label">
-              <input type="text" id="inputtext" pInputText [(ngModel)]="value1">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="name">
               <label for="inputtext">Nombre de contacto</label>
           </span>
       </div>
       <div class="field col-12 md:col-4">
-          <span class="p-float-label">
-              <p-inputNumber inputId="inputnumber" [(ngModel)]="value8"></p-inputNumber>
-              <label for="inputnumber">Teléfono de contacto</label>
-          </span>
-      </div>
+        <span class="p-float-label">
+            <input type="text" id="inputtext" pInputText [(ngModel)]="phone">
+            <label for="inputtext">Teléfono de contacto</label>
+        </span>
+    </div>
+
       <div class="field col-12 md:col-4">
         <span class="p-float-label">
-            <input type="text" id="inputtext" pInputText [(ngModel)]="value1">
+            <input type="text" id="inputtext" pInputText [(ngModel)]="email">
             <label for="inputtext">Email</label>
         </span>
     </div>
   </div>
+  <div class="flex justify-content-center">
+    <button pButton label="Guardar" [loading]="loading" (click)="updateCommerce()"></button>
+  </div>
 </div>
+
+<p-toast position="bottom-center"></p-toast>

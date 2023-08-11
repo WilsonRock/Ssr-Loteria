@@ -1,0 +1,106 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+      <h5>Sorteos</h5>
+      <button pButton class="absolute" (click)="showDialog()" [style]="{right: '60px', top: '165px'}" icon="pi pi-plus"></button>
+      <p-dialog header="Crear Sorteo" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw', height: '100vh' }" [draggable]="false" [resizable]="false" [maximizable]="true" (onMaximize)="true">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <span class="p-float-label">
+              <p-calendar [(ngModel)]="fecha_inicio" [showTime]="true" [showSeconds]="false"></p-calendar>
+              <label for="inputnumber">Fecha Inicio</label>
+            </span>
+          </div>
+          <div class="field col-12 md:col-6">
+            <span class="p-float-label">
+              <p-calendar [(ngModel)]="fecha_final" [showTime]="true" [showSeconds]="false"></p-calendar>
+              <label for="inputtext">Fecha Final</label>
+            </span>
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <div class="flex justify-content-center">
+            <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="createRaffle()" styleClass="p-button-text"></button>
+          </div>
+        </ng-template>
+      </p-dialog>
+      
+      <p-table #dt1 [columns]="cols" [value]="raffles" dataKey="id" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [rowHover]="true" [loading]="loading" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-between flex-column sm:flex-row">
+            <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left mb-2">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+            </span>
+          </div>
+        </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th>
+            Configuración
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{ rowData[col.field] }}
+          </td>
+          <td class="flex justify-content-center">
+            <button pButton label="" class="p-button-outlined mb-2" icon="pi pi-cog" (click)="showEditDialog(rowData)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">No se encontraron datos.</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="8">Cargando datos. Por favor espere.</td>
+        </tr>
+      </ng-template>
+      </p-table>
+
+
+    </div>
+  </div>
+</div>
+
+
+<p-dialog header="Editar Sorteo" [(visible)]="visible1" [modal]="true" [style]="{ width: '50vw', height: '100vh' }" [draggable]="false" [resizable]="false" [maximizable]="true" (onMaximize)="true">
+  <div class="grid p-fluid mt-3">
+    <div class="field col-12 md:col-6">
+      <span class="p-float-label">
+        <p-calendar [(ngModel)]="fecha_inicio" [showTime]="true" [showSeconds]="false"></p-calendar>
+        <label for="inputnumber">Fecha Inicio</label>
+      </span>
+    </div>
+    <div class="field col-12 md:col-6">
+      <span class="p-float-label">
+        <p-calendar [(ngModel)]="fecha_final" [showTime]="true" [showSeconds]="false"></p-calendar>
+        <label for="inputtext">Fecha Final</label>
+      </span>
+    </div>
+
+    <div class="field col-12 md:col-6" *ngFor="let item of config">
+      <span class="p-float-label">
+        <input type="text" pInputText [id]="item.key" [value]="item.value" (change)="updateValue(item.value, $event)">
+        <label for="inputtext">{{item.title}}</label>
+      </span>
+    </div>
+
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-center">
+      <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="updateRaffle($event)" styleClass="p-button-text"></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-toast position="bottom-center"></p-toast>

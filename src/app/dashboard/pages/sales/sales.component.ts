@@ -1,27 +1,50 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Table } from 'primeng/table';
-import { Customer, Representative } from 'src/app/template/demo/api/customer';
+import { Component, OnInit } from '@angular/core';
+import { ISale, ISaleTable } from '../../interfaces/sales.interface';
+import { SalesService } from '../../services/sales.service';
 
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.scss']
 })
-export class SalesComponent {
-  customers1: Customer[] = [];
-  loading: boolean = false;
-  representatives: Representative[] = [];
-  statuses: any[] = [];
-  activityValues: number[] = [0, 100];
-  @ViewChild('filter') filter!: ElementRef;
+export class SalesComponent implements OnInit {
 
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  cols: any[] = [];
+  sales: ISaleTable[] = [];
+  loading: boolean = false;
+
+  constructor(private salesService: SalesService) {}
+
+  ngOnInit() {
+    this.getSales();
+
+    this.cols = [
+      { field: 'id', header: 'Id' },
+      { field: 'name', header: 'Vendedor' },
+      { field: 'betNumber', header: 'Número apostado' },
+      { field: 'amount', header: 'Precio' },
+      { field: 'prizeWon', header: 'Premio' },
+      { field: 'createdAt', header: 'Fecha' },
+      { field: 'stateSale', header: 'Estado' },
+    ];
   }
 
-  clear(table: Table) {
-    table.clear();
-    this.filter.nativeElement.value = '';
+  getSales(): void {
+    this.loading = true
+    this.salesService.getSales().subscribe((res: any) => {
+      res.data.data.forEach((element: any) => {
+        this.sales.push({
+          id: element.id,
+          name: element.vendedor_id,//element.nombre_Vendedor + element.apellidos_Vendedor,
+          amount: element.precio,
+          prizeWon: element.premio,
+          createdAt: new Date(element.created_at).toLocaleString(),
+          betNumber: JSON.parse(element.caracteristicas)[0]?.numeros  || element.caracteristicas,
+          stateSale: JSON.parse(element.caracteristicas)[0]?.status || 'vendido'
+        });
+      });
+      this.loading = false;
+    })
   }
 
 }

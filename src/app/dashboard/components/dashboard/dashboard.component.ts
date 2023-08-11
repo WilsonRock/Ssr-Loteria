@@ -1,35 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { DashboardService } from '../../service/dashboard.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-
-  items!: MenuItem[];
-
+export class DashboardComponent implements OnInit {
   chartData: any;
-
   chartOptions: any;
 
-  subscription!: Subscription;
+  constructor() { }
 
-  constructor(public layoutService: DashboardService) {
-    this.subscription = this.layoutService.configUpdate$.subscribe(() => {
-      this.initChart();
-    });
-  }
-
-  ngOnInit() {
-    this.initChart();
-
-    this.items = [
-      { label: 'Add New', icon: 'pi pi-fw pi-plus' },
-      { label: 'Remove', icon: 'pi pi-fw pi-minus' }
-    ];
+  ngOnInit(): void {
+    this.initChart()
   }
 
   initChart() {
@@ -91,9 +73,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
 }

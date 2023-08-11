@@ -1,60 +1,86 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardLayoutComponent } from './layout/dashboard.layout.component';
-import { DashboardMenuComponent } from './components/menu/dashboard.menu.component';
-import { DashboardMenuitemComponent } from './components/menu/dashboard.menuitem.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
+import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'primeng/chart';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenuModule } from 'primeng/menu';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { SliderModule } from 'primeng/slider';
+import { MenubarModule } from 'primeng/menubar';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { CardModule } from 'primeng/card';
+import { CalendarModule } from 'primeng/calendar';
+
+
+import { SharedModule } from '../shared/shared.module';
+
+import { DashboardsRoutingModule } from './dashboard-routing.module';
+import { DashboardLayoutComponent } from './layout/dashboard.layout.component';
+
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardMenuComponent } from './components/menu/dashboard.menu.component';
 import { DashboardSidebarComponent } from './components/sidebar/dashboard.sidebar.component';
 import { DashboardTopbarComponent } from './components/topbar/dashboard.topbar.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DashboardsRoutingModule } from './dashboard-routing.module';
-import { ChartModule } from 'primeng/chart';
-import { MenuModule } from 'primeng/menu';
-import { CommonModule } from '@angular/common';
-import { SalesComponent } from './pages/sales/sales.component';
-import { TableModule } from 'primeng/table';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { DropdownModule } from 'primeng/dropdown';
-import { SliderModule } from 'primeng/slider';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { UsersComponent } from './pages/users/users.component';
-import { ConfigComponent } from './pages/config/config.component';
-import { InputNumberModule } from 'primeng/inputnumber';
+import { DashboardMenuItemComponent } from './components/menu-item/dashboard.menu-item.component';
+import { DashboardTopMenuComponent } from './components/top-menu/dashboard.top-menu.component';
 
+import { ConfigComponent } from './pages/config/config.component';
+import { SalesComponent } from './pages/sales/sales.component';
+import { UsersComponent } from './pages/users/users.component';
+import { GamesComponent } from './pages/games/games.component';
+import { AssignTicketComponent } from './pages/assign-ticket/assign-ticket.component';
+import { TableModule } from 'primeng/table';
+import { RafflesComponent } from './pages/raffles/raffles.component';
 
 @NgModule({
   declarations: [
-    DashboardMenuitemComponent,
     DashboardTopbarComponent,
     DashboardMenuComponent,
+    DashboardMenuItemComponent,
     DashboardSidebarComponent,
     DashboardLayoutComponent,
     DashboardComponent,
     SalesComponent,
     UsersComponent,
-    ConfigComponent
+    ConfigComponent,
+    DashboardTopMenuComponent,
+    GamesComponent,
+    AssignTicketComponent,
+    RafflesComponent,
   ],
   imports: [
-    CommonModule,
-    RouterModule,
-    DashboardsRoutingModule,
-    ChartModule,
-    MenuModule,
-    TableModule,
-    MultiSelectModule,
-    DropdownModule,
-    SliderModule,
-    ProgressBarModule,
-    FormsModule,
-    InputTextModule,
+    SharedModule,
     ButtonModule,
-    InputNumberModule
+    ChartModule,
+    CommonModule,
+    DashboardsRoutingModule,
+    DropdownModule,
+    FormsModule,
+    InputNumberModule,
+    InputTextModule,
+    MenuModule,
+    MultiSelectModule,
+    ProgressBarModule,
+    RouterModule,
+    SliderModule,
+    MenubarModule,
+    ToastModule,
+    DialogModule,
+    TableModule,
+    ToggleButtonModule,
+    CardModule,
+    CalendarModule
   ],
-  exports: [DashboardLayoutComponent]
+  exports: [DashboardLayoutComponent],
+  providers: [MessageService]
 })
 export class DashboardModule { }

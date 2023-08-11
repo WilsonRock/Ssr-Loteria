@@ -1,0 +1,82 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+      <p-dialog header="Asignar Boletos" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+        <div class="grid p-fluid mt-3" style="grid-template-columns: 1fr 1fr;">
+          <div class="field col-12" *ngFor="let ticket of tikets">
+            <!-- <p-toggleButton [(ngModel)]="ticket.checked" [disabled]="ticket.status == 'vendido'" [onLabel]="ticket.numeros" [offLabel]="ticket.numeros" (click)="selectTicket(ticket)"></p-toggleButton> -->
+            <div class="card pointer" (click)="selectTicket(ticket)" [ngClass]="{'ticket-selected': ticket.checked, 'disabled': ticket.status == 'vendido' || ticket.status == 'asignado'}">
+              <!-- <p-card> -->
+                <div class="justify-content-between" style="width: 70%; margin: auto; display: grid;
+                grid-template-columns: 1fr 1fr 1fr;">
+                  <div class="grid">
+                    <span *ngFor="let numero of ticket.numeros">{{numero}}</span></div>
+                  <div class="flex align-items-center" style="font-size: 30px;">{{ticket.sorpresa}}</div>
+                  
+                  <div class="grid">
+                    <span style="font-size: 11px;">{{ticket.id}}</span>
+                    <img src="../../../../assets/imgs/Alfa.png" width="80" alt="" [ngClass]="{'filter-brightness-50': ticket.checked}">
+                    <strong style="font-size: 12px;" *ngIf="ticket.status == 'vendido' || ticket.status == 'asignado'">
+                      {{ticket.status | uppercase}}
+                    </strong>
+                  </div>
+
+                </div>
+              <!-- </p-card> -->
+            </div>
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <div class="flex justify-content-center">
+            <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="reserve()" styleClass="p-button-text"></button>
+          </div>
+        </ng-template>
+      </p-dialog>
+
+      <p-table #dt1 [columns]="cols" [value]="users" dataKey="id" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [rowHover]="true" [loading]="loading" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-between flex-column sm:flex-row">
+            <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left mb-2">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+            </span>
+          </div>
+        </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th>
+            Asignar
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{ rowData[col.field] }}
+          </td>
+          <td>
+            <button pButton label="" class="p-button-outlined mb-2" icon="pi pi-file-edit" (click)="showDialog(rowData)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">No se encontraron datos.</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="8">Cargando datos. Por favor espere.</td>
+        </tr>
+      </ng-template>
+      </p-table>
+
+    </div>
+  </div>
+</div>
+
+<p-toast position="bottom-center"></p-toast>

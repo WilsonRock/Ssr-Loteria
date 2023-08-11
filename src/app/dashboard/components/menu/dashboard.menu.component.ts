@@ -1,52 +1,83 @@
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
-import { DashboardService } from '../../service/dashboard.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
 	selector: 'dashboard-menu',
 	templateUrl: './dashboard.menu.component.html',
 	styleUrls: ['./dashboard.menu.component.scss']
 })
-export class DashboardMenuComponent implements OnInit {
+export class DashboardMenuComponent implements OnInit, OnDestroy {
 
 	model: any[] = [];
+	commerces: any[] = [];
+	destroy: any;
 
-	constructor(public layoutService: DashboardService) { }
+	constructor(private dashboardService: DashboardService) {
+		this.destroy = this.dashboardService.updateCommerces$.subscribe(data => {
+      if (data) {
+				this.commerces = []
+        this.getCommerces();
+      }
+    });
+		this.getCommerces()
+	}
 
 	ngOnInit() {
 		this.model = [
 			{
-				label: 'Home',
-				items: [
-					{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
-					{ label: 'Ventas', icon: 'pi pi-fw pi-money-bill', routerLink: ['/sales'] },
-					{ label: 'Usuarios', icon: 'pi pi-fw pi-users', routerLink: ['/users'] },
-					{ label: 'Configuración', icon: 'pi pi-fw pi-cog', routerLink: ['/config'] }
-
-				]
-			},
-			{
-				label: 'Páginas',
-				icon: 'pi pi-fw pi-briefcase',
-				items: [
+				label: 'Sucursales',
+				items: this.commerces	 /* [
 					{
-						label: 'Auth',
-						icon: 'pi pi-fw pi-user',
+						label: 'Gisoft',
+						icon: 'pi pi-fw pi-building',
+						routerLink: ['/notfound'],
 						items: [
 							{
-								label: 'Login',
-								icon: 'pi pi-fw pi-sign-in',
-								routerLink: ['/auth/login']
+								label: 'Comercio 1',
+								icon: 'pi pi-fw pi-briefcase',
+								items: [
+									{
+										label: 'Comercio 1.1',
+										icon: 'pi pi-fw pi-briefcase'
+									}
+								]
+							},{
+								label: 'Comercio 2',
+								icon: 'pi pi-fw pi-briefcase',
+								items: [
+									{
+										label: 'Comercio 2.1',
+										icon: 'pi pi-fw pi-briefcase',
+										items: [
+											{
+												label: 'Comercio 2.1.1',
+												icon: 'pi pi-fw pi-briefcase'
+											}
+										]
+									},
+								]
 							}
 						]
-					},
-					{
-						label: 'Not Found',
-						icon: 'pi pi-fw pi-exclamation-circle',
-						routerLink: ['/notfound']
-					},
-				]
+					}
+				] */
 			}
 		];
+	}
+
+	ngOnDestroy() {
+    this.destroy.unsubscribe();
+  }
+
+	getCommerces() {
+		this.dashboardService.getCommerces().subscribe((res: any) => {
+			res.data.forEach((element: any) => {
+				this.commerces.push({
+					label: element.nombre,
+					icon: 'pi pi-fw pi-building',
+					routerLink: [`dashboard/${ element.id }`],
+					
+				})
+			});
+		})
 	}
 }
