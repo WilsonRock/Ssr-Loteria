@@ -32,6 +32,8 @@ export class AssignTicketComponent implements OnInit {
   game_id: any;
   ticketSelect: any = [];
   user_selected: any;
+  cantidadDeseada:any=0;
+
 
   constructor(private usersService: UsersService, private gameService: GamesService, private activatedrouter: ActivatedRoute, private messageService: MessageService) {
     this.activatedrouter.params.subscribe((params: any) => {
@@ -99,7 +101,8 @@ export class AssignTicketComponent implements OnInit {
   selectTicket(value: any) {
     if (value.status !== 'vendido') {
       value.checked = !value.checked;
-      this.ticketSelect.push(value);
+      console.log(value);//
+      this.ticketSelect.push(value); // lo que hace es pushear al ticket select
     }
   }
 
@@ -117,4 +120,60 @@ export class AssignTicketComponent implements OnInit {
       this.messageService.add({ severity: 'eror', summary: 'Success', detail: error.message });
     })
   }
+
+
+
+  seleccionarTarjetasAleatorias(cantidad: number) {
+    const tarjetasDisponibles = this.tikets.filter((ticket: { status: string; }) => ticket.status !== 'vendido' && ticket.status !== 'asignado');
+    
+    const tarjetasSeleccionadas = [];
+    while (tarjetasSeleccionadas.length < cantidad && tarjetasDisponibles.length > 0) {
+      const randomIndex = Math.floor(Math.random() * tarjetasDisponibles.length);
+      tarjetasSeleccionadas.push(tarjetasDisponibles.splice(randomIndex, 1)[0]);
+    }
+  
+    tarjetasSeleccionadas.forEach(ticket => this.selectTicket(ticket));
+  }
+  
+  Organizar() {
+    console.log("organizador");
+    // Ordena el arreglo de tarjetas para mostrar primero las seleccionadas
+    this.tikets.sort((a: { checked: any; }, b: { checked: any; }) => {
+      if (a.checked && !b.checked) {
+        return -1; // 'a' aparece primero si está seleccionada y 'b' no lo está
+      } else if (!a.checked && b.checked) {
+        return 1; // 'b' aparece primero si está seleccionada y 'a' no lo está
+      }
+      return 0; // Mantener el orden si ambas tarjetas están seleccionadas o no
+    });
+  } 
+  
+  
+
+  OrganizeBysale() {
+    console.log("organizador");
+    // Ordena el arreglo de tarjetas para mostrar primero las seleccionadas
+    this.tikets.sort((a: { checked: any; }, b: { checked: any; }) => {
+      if (a.checked && !b.checked) {
+        return -1; // 'a' aparece primero si está seleccionada y 'b' no lo está
+      } else if (!a.checked && b.checked) {
+        return 1; // 'b' aparece primero si está seleccionada y 'a' no lo está
+      }
+      return 0; // Mantener el orden si ambas tarjetas están seleccionadas o no
+    });
+  }
+  
+  OrganizeByAsigned() {
+    console.log("organizador");
+    // Ordena el arreglo de tarjetas para mostrar primero las seleccionadas
+    this.tikets.sort((a: { checked: any; }, b: { checked: any; }) => {
+      if (a.checked && !b.checked) {
+        return -1; // 'a' aparece primero si está seleccionada y 'b' no lo está
+      } else if (!a.checked && b.checked) {
+        return 1; // 'b' aparece primero si está seleccionada y 'a' no lo está
+      }
+      return 0; // Mantener el orden si ambas tarjetas están seleccionadas o no
+    });
+  } 
+ 
 }
