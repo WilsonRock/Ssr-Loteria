@@ -25,10 +25,10 @@
                 <td class="property-label">Premio</td>
                 <td>{{ sale.premio }}</td>
               </tr>
-<!--               <tr>
-                <td class="property-label">Comisión</td>
-                <td>{{ sale.comision }}</td>
-              </tr> -->
+              <tr>
+                <td class="property-label">Fecha de venta</td>
+                <td>{{ sale.created_at |date:"short"}}</td>
+              </tr>
               <tr>
                 <td class="property-label">Detalles</td>
                 <td>
