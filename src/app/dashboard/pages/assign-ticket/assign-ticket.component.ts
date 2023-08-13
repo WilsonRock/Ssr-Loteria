@@ -167,34 +167,5 @@ export class AssignTicketComponent implements OnInit {
       return 0; // Mantener el orden si ambas tarjetas están seleccionadas o no
       return a.status.localeCompare(b.status);
     });
-  }
-  
-  
-
-  OrganizeBysale() {
-    console.log("organizador");
-    // Ordena el arreglo de tarjetas para mostrar primero las seleccionadas
-    this.tikets.sort((a: { checked: any; }, b: { checked: any; }) => {
-      if (a.checked && !b.checked) {
-        return -1; // 'a' aparece primero si está seleccionada y 'b' no lo está
-      } else if (!a.checked && b.checked) {
-        return 1; // 'b' aparece primero si está seleccionada y 'a' no lo está
-      }
-      return 0; // Mantener el orden si ambas tarjetas están seleccionadas o no
-    });
-  }
-  
-  OrganizeByAsigned() {
-    console.log("organizador");
-    // Ordena el arreglo de tarjetas para mostrar primero las seleccionadas
-    this.tikets.sort((a: { checked: any; }, b: { checked: any; }) => {
-      if (a.checked && !b.checked) {
-        return -1; // 'a' aparece primero si está seleccionada y 'b' no lo está
-      } else if (!a.checked && b.checked) {
-        return 1; // 'b' aparece primero si está seleccionada y 'a' no lo está
-      }
-      return 0; // Mantener el orden si ambas tarjetas están seleccionadas o no
-    });
   } 
- 
 }
