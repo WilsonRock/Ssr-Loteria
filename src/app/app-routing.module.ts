@@ -4,6 +4,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { DashboardLayoutComponent } from './dashboard/layout/dashboard.layout.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { PublicGuard } from './auth/guards/public.guard';
+import { LandingpageComponent } from './Landingpage/Landingpage.component';
 
 const routes: Routes = [
 	{
@@ -18,6 +19,10 @@ const routes: Routes = [
 		canActivate: [PublicGuard],
 		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
 	},
+	{
+		path: 'qr/:id',
+		component: LandingpageComponent
+	  },
 	{
 		path: 'notfound',
 		component: NotfoundComponent
