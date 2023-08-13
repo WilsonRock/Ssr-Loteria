@@ -129,10 +129,11 @@ export class AssignTicketComponent implements OnInit {
     
     if (cantidad > tarjetasDisponibles.length) {
       // Display a SweetAlert2 error message
+      this.visible = false;
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'No se pueden seleccionar más tarjetas de las disponibles.',
+        text: 'No se pueden seleccionar más tickets de los disponibles.',
         customClass: {
           container: 'sweetalert-container', // Add custom class here
         }
