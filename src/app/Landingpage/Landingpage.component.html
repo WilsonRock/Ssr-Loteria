@@ -1,0 +1,49 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <div style="border-radius: 56px; padding: 0.3rem;">
+      <div class="w-full surface-card py-5 px-5 sm:px-8" style="border-radius: 53px; max-height: 80vh; overflow-y: auto;">
+        <div class="text-center mb-5">
+          <div class="text-900 text-3xl font-medium mb-3">
+            <img src="../../../../assets/imgs/Alfa.png" width="150" alt="">
+          </div>
+        </div>
+        <div class="table-container">
+          <p-table [value]="[sale]" [responsive]="true" class="custom-table">
+            <ng-template pTemplate="body">
+              <tr>
+                <td class="property-label">ID</td>
+                <td>{{ sale.id }}</td>
+              </tr>
+              <tr>
+                <td class="property-label">Precio</td>
+                <td>{{ sale.precio }}</td>
+              </tr>
+              <tr>
+                <td class="property-label">Premio</td>
+                <td>{{ sale.premio }}</td>
+              </tr>
+              <tr>
+                <td class="property-label">Fecha de venta</td>
+                <td>{{ sale.created_at |date:"short"}}</td>
+              </tr>
+              <tr>
+                <td class="property-label">Detalles</td>
+                <td>
+                  <ul>
+                <!--     <li>ID: {{ caracteristicas.id }}</li> -->
+                    <li>Status: {{ caracteristicas.status }}</li>
+                   <!--  <li>User: {{ caracteristicas.user }}</li> -->
+                    <li>Números:</li>
+                    <ul>
+                      <li *ngFor="let numero of caracteristicas.numeros">{{ numero }}</li>
+                    </ul>
+                  </ul>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+/* Agrega estilos generales para la tabla */
+.table-responsive {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+  
+  .table th, .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Estilos para filas alternas (opcional) */
+  .table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Ajusta estilos para pantallas pequeñas (responsive) */
+  @media (max-width: 768px) {
+    .table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+  
+  }
+
+  .table-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .header-image {
+    width: 100%;
+    height: auto;
+    max-height: 150px; /* Ajusta la altura máxima de la imagen */
+  }
+  
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+  
+  .custom-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .property-label {
+    font-weight: bold;
+    width: 150px; /* Ajusta el ancho de la columna de etiquetas */
+  }
+  

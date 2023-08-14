@@ -5,6 +5,7 @@ import { Table } from 'primeng/table';
 import { GamesService } from '../../services/games.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-assign-ticket',
@@ -32,6 +33,8 @@ export class AssignTicketComponent implements OnInit {
   game_id: any;
   ticketSelect: any = [];
   user_selected: any;
+  cantidadDeseada:any=0;
+
 
   constructor(private usersService: UsersService, private gameService: GamesService, private activatedrouter: ActivatedRoute, private messageService: MessageService) {
     this.activatedrouter.params.subscribe((params: any) => {
@@ -99,7 +102,8 @@ export class AssignTicketComponent implements OnInit {
   selectTicket(value: any) {
     if (value.status !== 'vendido') {
       value.checked = !value.checked;
-      this.ticketSelect.push(value);
+      console.log(value);//
+      this.ticketSelect.push(value); // lo que hace es pushear al ticket select
     }
   }
 
@@ -117,4 +121,52 @@ export class AssignTicketComponent implements OnInit {
       this.messageService.add({ severity: 'eror', summary: 'Success', detail: error.message });
     })
   }
+
+
+
+  seleccionarTarjetasAleatorias(cantidad: number) {
+    const tarjetasDisponibles = this.tikets.filter((ticket: { status: string; }) => ticket.status !== 'vendido' && ticket.status !== 'asignado');
+    
+    if (cantidad > tarjetasDisponibles.length) {
+      // Display a SweetAlert2 error message
+      this.visible = false;
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se pueden seleccionar más tickets de los disponibles.',
+        customClass: {
+          container: 'sweetalert-container', // Add custom class here
+        }
+      });
+      
+      return; // Exit the function
+    }
+    
+    const tarjetasSeleccionadas = [];
+    while (tarjetasSeleccionadas.length < cantidad && tarjetasDisponibles.length > 0) {
+      const randomIndex = Math.floor(Math.random() * tarjetasDisponibles.length);
+      tarjetasSeleccionadas.push(tarjetasDisponibles.splice(randomIndex, 1)[0]);
+    }
+  
+    tarjetasSeleccionadas.forEach(ticket => this.selectTicket(ticket));
+  }
+  
+  Organizar() {
+    console.log("organizador");
+    // Ordena el arreglo de tarjetas para mostrar primero las seleccionadas
+    this.tikets.sort((a: { checked: any; }, b: { checked: any; }) => {
+      if (a.checked && !b.checked) {
+        return -1;
+      } else if (!a.checked && b.checked) {
+        return 1;
+      }
+      return 0;
+    });
+    
+    // Luego, ordena por la propiedad 'status'
+    this.tikets.sort((a: { status: string; }, b: { status: any; }) => {
+      return 0; // Mantener el orden si ambas tarjetas están seleccionadas o no
+      return a.status.localeCompare(b.status);
+    });
+  } 
 }
