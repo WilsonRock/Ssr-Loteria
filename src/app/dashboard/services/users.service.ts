@@ -42,6 +42,6 @@ export class UsersService {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${ localStorage.getItem('token') }`
       });
-     return this.http.put(`${environment.api}/api/v1/users/${userId}`, userData, { headers: this.headers });
+     return this.http.patch(`${environment.api}/api/v1/users/${userId}`, userData, { headers: this.headers });
    }
  }
