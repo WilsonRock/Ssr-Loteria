@@ -20,18 +20,26 @@
           <th *ngFor="let col of columns">
             {{ col.header }}
           </th>
-          <th>
+          <th class="column-header">
             Configuración
+          </th>
+          <th class="column-header">
+            Password
           </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
-          <td *ngFor="let col of columns">
+          <td *ngFor="let col of columns" class="column-cell" pTooltip="{{ rowData[col.field] }}" tooltipPosition="top">
             {{ rowData[col.field] }}
           </td>
-          <td class="flex justify-content-center">
+          <td class="flex justify-content-center"  class="column-cell">
             <button pButton label="" class="p-button-outlined mb-2" icon="pi pi-cog" (click)="showEditDialog(rowData)"></button>
+          </td>
+          <!-- New Column Content -->
+          <td>
+            <button pButton label="" class="p-button-outlined mb-2" icon=" pi pi-key" (click)="showEditpw(rowData)"></button>
+            {{ rowData.newColumnField }}
           </td>
         </tr>
       </ng-template>
@@ -163,6 +171,35 @@
  
   </ng-template>
 </p-dialog>
+
+
+
+<p-dialog header="Cambiar contraseña" [(visible)]="Visiblepw" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true" (onMaximize)="true">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="inputName">Nombre(s)</label>
+      <input type="text" id="inputName" pInputText [(ngModel)]="formDataChangepw.nombres" [disabled]="true">
+    </div>
+    <div class="p-field">
+        <label for="inputtext">Email</label>
+        <input type="text" id="inputtext" pInputText [(ngModel)]="formDataChangepw.email" [disabled]="true">
+    </div>
+    <div class="p-field">
+      <label for="inputGeneratedPassword">Contraseña generada</label>
+      <input type="text" id="inputGeneratedPassword" pInputText [(ngModel)]="generatedPassword">
+    
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-center">
+      <button pButton icon="pi pi-refresh" label="Generar" (click)="generatePassword()" styleClass="p-button-text"></button>
+      <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="updateUserPw()" [disabled]="!generatedPassword" styleClass="p-button-text"></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+
 
 
 <p-toast position="bottom-center"></p-toast>

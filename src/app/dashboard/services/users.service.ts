@@ -42,6 +42,29 @@ export class UsersService {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${ localStorage.getItem('token') }`
       });
+ 
+      userData = {
+        nombres : userData.nombres,
+        apellidos : userData.apellidos,
+        documento : userData.documento,
+        telefono: userData.telefono,
+        email :userData.email,
+        active:userData.active,
+      }
+     
      return this.http.patch(`${environment.api}/api/v1/users/${userId}`, userData, { headers: this.headers });
    }
+
+   updateUserPw(userId: string, userData: any): Observable<any>  {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${ localStorage.getItem('token') }`
+    });
+
+    userData = {
+      password : userData,
+    }
+     return this.http.patch(`${environment.api}/api/v1/users/${userId}`, userData, { headers: this.headers });
+ }
+
  }

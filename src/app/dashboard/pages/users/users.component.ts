@@ -11,6 +11,7 @@ import { MessageService } from 'primeng/api';
 })
 export class UsersComponent implements OnInit, OnDestroy {
   visible1: boolean = false;
+  Visiblepw: boolean = false;
   loading: boolean = false;
   cols: any[] = [];
   users: IUsersTable[] = [];
@@ -22,8 +23,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   phone: string = '';
   dni: string = '';
   destroy: any;
-  config:any
+  config:any;
+  reset:any;
   formData: any = {};
+  formDataChangepw: any = {};
+  characters: string | undefined;
+  generatedPassword: any;
 
   constructor(private usersService: UsersService,private messageService: MessageService) {
     this.destroy = this.usersService.updateUsers$.subscribe(data => {
@@ -128,6 +133,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.loading=false;
         this.visible1 = false;
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario actualizado correctamente' });
+        this.usersService.eventUpdateUsers(true);
         // Manejar la respuesta si es necesario
         console.log(response);
       },
@@ -140,4 +146,64 @@ export class UsersComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  showEditpw(raffle: any) {
+    this.formDataChangepw = '';
+    this.loading = true;
+    console.log("llama", raffle.email);
+    this.Visiblepw = true;
+  
+    this.usersService.searchUser(raffle.email ).subscribe(
+      (res: any) => {
+        this.config = [];
+      this.formDataChangepw = res.data[0];
+      console.log(  this.formDataChangepw);
+      this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+
+
+  generatePassword() {
+    const length = 10; // longitud de la contraseña generada
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let password = "";
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset.charAt(randomIndex);
+    }
+   // this.formDataChangepw= password
+    this.generatedPassword = password;
+  }
+
+  updateUserPw(data?: any) {
+    this.loading=true;
+    //console.log(this.formData.id);
+    this.usersService.updateUserPw(this.formDataChangepw.id, this.generatedPassword).subscribe(
+      response => {
+        this.generatedPassword=null;
+        this.loading=false;
+        this.Visiblepw = false;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario actualizado correctamente' });
+        this.usersService.eventUpdateUsers(true);
+        // Manejar la respuesta si es necesario
+        console.log(response);
+      },
+      error => {
+        this.generatedPassword=null;
+        this.loading=false;
+        this.Visiblepw = true;
+        this.messageService.add({ severity: 'eror', summary: 'Success', detail: error.message });
+        // Manejar el error si ocurre
+        console.error(error);
+      }
+    );
+  }
+
+
+
 }

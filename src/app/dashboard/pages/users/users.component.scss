@@ -47,4 +47,20 @@
     font-size: 14px;
     background-color: #fff;
   }
+/*   .p-datatable.p-datatable-gridlines:has(.p-datatable-thead):has(.p-datatable-tbody) .p-datatable-tbody > tr > td {
+    border-width: 0 0 1px 1px;
+    width: 74% !important;
+    height: 80% !important;
+} */
+
+.column-header {
+  width: 40%;
+  height: 10%;
+}
+
+.column-cell {
+  width: 40%;
+  text-align: center;
+}
+
   
