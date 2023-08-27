@@ -26,40 +26,36 @@ export class DashboardMenuComponent implements OnInit, OnDestroy {
 		this.model = [
 			{
 				label: 'Sucursales',
-				items: this.commerces	 /* [
+				items: /* this.commerces	 */ [
 					{
-						label: 'Gisoft',
+						label: 'Guatemala',
 						icon: 'pi pi-fw pi-building',
-						routerLink: ['/notfound'],
 						items: [
 							{
-								label: 'Comercio 1',
-								icon: 'pi pi-fw pi-briefcase',
-								items: [
-									{
-										label: 'Comercio 1.1',
-										icon: 'pi pi-fw pi-briefcase'
-									}
-								]
-							},{
-								label: 'Comercio 2',
-								icon: 'pi pi-fw pi-briefcase',
-								items: [
-									{
-										label: 'Comercio 2.1',
-										icon: 'pi pi-fw pi-briefcase',
-										items: [
-											{
-												label: 'Comercio 2.1.1',
-												icon: 'pi pi-fw pi-briefcase'
-											}
-										]
-									},
-								]
+								label: 'Escuintla',
+								icon: 'pi pi-fw pi-briefcase'
+							},
+							{
+								label: 'Chiquimulilla',
+								icon: 'pi pi-fw pi-briefcase'
+							}
+						]
+					},
+					{
+						label: 'El Salvador',
+						icon: 'pi pi-fw pi-building',
+						items: [
+							{
+								label: 'Quezaltepeque',
+								icon: 'pi pi-fw pi-briefcase'
+							},
+							{
+								label: 'Armenia',
+								icon: 'pi pi-fw pi-briefcase'
 							}
 						]
 					}
-				] */
+				]
 			}
 		];
 	}
