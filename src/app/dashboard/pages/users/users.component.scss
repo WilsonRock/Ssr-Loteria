@@ -1,0 +1,66 @@
+/* Estilo para el campo de selección */
+.custom-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    
+  }
+  
+  /* Estilo para el formulario en general */
+  #miFormulario {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+  }
+  
+  .label-for-select {
+    display: block; 
+    margin-bottom: 5px; 
+  }
+  
+
+  .p-float-label {
+    display: block;
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
+  .p-float-label label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s ease all;
+  }
+  
+  .p-float-label select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+  }
+/*   .p-datatable.p-datatable-gridlines:has(.p-datatable-thead):has(.p-datatable-tbody) .p-datatable-tbody > tr > td {
+    border-width: 0 0 1px 1px;
+    width: 74% !important;
+    height: 80% !important;
+} */
+
+.column-header {
+  width: 40%;
+  height: 10%;
+}
+
+.column-cell {
+  width: 40%;
+  text-align: center;
+}
+
+  

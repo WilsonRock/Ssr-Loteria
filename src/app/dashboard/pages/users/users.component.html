@@ -1,56 +1,205 @@
 <div class="grid">
 	<div class="col-12">
 		<div class="card">
+      <h5>Vendedores</h5>
       <button pButton class="absolute" (click)="showDialog()" [style]="{right: '60px', top: '165px'}" icon="pi pi-plus"></button>
-      <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true">
-        <h5>Crear Vendedor</h5>
-        <div class="grid p-fluid mt-3">
-          <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-              <input type="text" id="inputtext" pInputText [(ngModel)]="name">
-              <label for="inputtext">Nombre(s)</label>
+
+      
+      <p-table #dt1 [columns]="cols" [value]="users" dataKey="id" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [rowHover]="true" [loading]="loading" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+          <div class="flex justify-content-between flex-column sm:flex-row">
+            <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left mb-2">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
             </span>
-          </div>
-          <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-              <input type="text" id="inputtext" pInputText [(ngModel)]="last_name">
-              <label for="inputnumber">Apellido(s)</label>
-            </span>
-          </div>
-          <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-              <input type="text" id="inputtext" pInputText [(ngModel)]="dni">
-              <label for="inputtext">Documento</label>
-            </span>
-          </div>
-          <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-              <input type="text" id="inputtext" pInputText [(ngModel)]="email">
-              <label for="inputtext">Email</label>
-            </span>
-          </div>
-          <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-              <input type="text" id="inputtext" pInputText [(ngModel)]="password">
-              <label for="inputtext">Password</label>
-            </span>
-          </div>
-          <div class="field col-12 md:col-4">
-            <span class="p-float-label">
-              <input type="text" id="inputtext" pInputText [(ngModel)]="phone">
-              <label for="inputtext">Teléfono</label>
-            </span>
-          </div>
-        </div>
-        <ng-template pTemplate="footer">
-          <div class="flex justify-content-center">
-            <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="createSeller()" styleClass="p-button-text"></button>
           </div>
         </ng-template>
-      </p-dialog>
-      <shared-table-dynamic-colums [cols]="cols" [data]="users" [title]="'Vendedores'" [loading]="loading"></shared-table-dynamic-colums>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+          <th class="column-header">
+            Configuración
+          </th>
+          <th class="column-header">
+            Password
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" class="column-cell" pTooltip="{{ rowData[col.field] }}" tooltipPosition="top">
+            {{ rowData[col.field] }}
+          </td>
+          <td class="flex justify-content-center"  class="column-cell">
+            <button pButton label="" class="p-button-outlined mb-2" icon="pi pi-cog" (click)="showEditDialog(rowData)"></button>
+          </td>
+          <!-- New Column Content -->
+          <td>
+            <button pButton label="" class="p-button-outlined mb-2" icon=" pi pi-key" (click)="showEditpw(rowData)"></button>
+            {{ rowData.newColumnField }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">No se encontraron datos.</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="8">Cargando datos. Por favor espere.</td>
+        </tr>
+      </ng-template>
+      </p-table>
+
+
     </div>
   </div>
 </div>
+<!-- <p-progressBar *ngIf="loading" mode="indeterminate"></p-progressBar> -->
+
+    <p-dialog header="Editar Usuario" [(visible)]="visible1" [modal]="true" [style]="{ width: '50vw', height: '100vh' }" [draggable]="false" [resizable]="false" [maximizable]="true" (onMaximize)="true">
+
+<div class="grid p-fluid mt-3">
+    <div class="grid p-fluid mt-3">
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="formData.nombres">
+          <label for="inputtext">Nombre(s)</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="formData.apellidos">
+          <label for="inputnumber">Apellido(s)</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="formData.documento">
+          <label for="inputtext">Documento</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="formData.email">
+          <label for="inputtext">Email</label>
+        </span>
+      </div>
+
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="formData.telefono">
+          <label for="inputtext">Teléfono</label>
+        </span>
+      </div>
+       
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <select id="active" name="active" [(ngModel)]="formData.active" class="custom-select">
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+          </select>
+          <label for="active">Activo</label>
+        </span>
+      </div>
+      
+    </div>      
+  </div>
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-center">
+         <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="updateUser()" styleClass="p-button-text"></button>
+        </div>
+      </ng-template>
+    </p-dialog>
+
+
+<p-dialog header="Crear Vendedor" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true" (onMaximize)="true">
+  <div class="grid p-fluid mt-3">
+    <div class="grid p-fluid mt-3">
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="name">
+          <label for="inputtext">Nombre(s)</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="last_name">
+          <label for="inputnumber">Apellido(s)</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="dni">
+          <label for="inputtext">Documento</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="email">
+          <label for="inputtext">Email</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="password">
+          <label for="inputtext">Password</label>
+        </span>
+      </div>
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label">
+          <input type="text" id="inputtext" pInputText [(ngModel)]="phone">
+          <label for="inputtext">Teléfono</label>
+        </span>
+      </div>
+    </div>
+<!--     <ng-template pTemplate="footer">
+      <div class="flex justify-content-center">
+        <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="createSeller()" styleClass="p-button-text"></button>
+      </div>
+    </ng-template> -->
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-center">
+      <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="createSeller()" styleClass="p-button-text"></button>
+    </div>
+ 
+  </ng-template>
+</p-dialog>
+
+
+
+<p-dialog header="Cambiar contraseña" [(visible)]="Visiblepw" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [maximizable]="true" (onMaximize)="true">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="inputName">Nombre(s)</label>
+      <input type="text" id="inputName" pInputText [(ngModel)]="formDataChangepw.nombres" [disabled]="true">
+    </div>
+    <div class="p-field">
+        <label for="inputtext">Email</label>
+        <input type="text" id="inputtext" pInputText [(ngModel)]="formDataChangepw.email" [disabled]="true">
+    </div>
+    <div class="p-field">
+      <label for="inputGeneratedPassword">Contraseña generada</label>
+      <input type="text" id="inputGeneratedPassword" pInputText [(ngModel)]="generatedPassword">
+    
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-center">
+      <button pButton icon="pi pi-refresh" label="Generar" (click)="generatePassword()" styleClass="p-button-text"></button>
+      <button pButton icon="pi pi-check" label="Guardar" [loading]="loading" (click)="updateUserPw()" [disabled]="!generatedPassword" styleClass="p-button-text"></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+
+
 
 <p-toast position="bottom-center"></p-toast>

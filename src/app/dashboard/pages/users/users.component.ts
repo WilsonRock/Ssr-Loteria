@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IUsersTable } from '../../interfaces/users.interface';
 import { UsersService } from '../../services/users.service';
+import { Table } from 'primeng/table';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-users',
@@ -8,6 +10,8 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  visible1: boolean = false;
+  Visiblepw: boolean = false;
   loading: boolean = false;
   cols: any[] = [];
   users: IUsersTable[] = [];
@@ -19,8 +23,14 @@ export class UsersComponent implements OnInit, OnDestroy {
   phone: string = '';
   dni: string = '';
   destroy: any;
+  config:any;
+  reset:any;
+  formData: any = {};
+  formDataChangepw: any = {};
+  characters: string | undefined;
+  generatedPassword: any;
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService,private messageService: MessageService) {
     this.destroy = this.usersService.updateUsers$.subscribe(data => {
       if (data) {
         this.getUsers();
@@ -31,13 +41,13 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUsers();
 
-    this.cols = [
+    this.cols = [// esto crea la vista que requiero
       { field: 'id', header: 'Id' },
       { field: 'firstName', header: 'Nombre(s)' },
       { field: 'lastName', header: 'Apellido(s)' },
       { field: 'dni', header: 'Documento' },
       { field: 'phone', header: 'Teléfono' },
-      { field: 'email', header: 'Email' },
+      { field: 'email', header: 'Email' }
     ];
   }
 
@@ -56,7 +66,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           lastName: element.apellidos,
           dni: element.documento,
           phone: element.telefono,
-          email: element.email.toLowerCase()
+          email: element.email.toLowerCase(),
         })
       });
       this.loading = false;
@@ -83,4 +93,117 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.usersService.eventUpdateUsers(true);
     })
   }
+
+  showEditDialog(raffle: any) {
+    this.formData = '';
+    this.loading = true;
+    console.log("llama", raffle.email);
+    this.visible1 = true;
+  
+    this.usersService.searchUser(raffle.email ).subscribe(
+      (res: any) => {
+        this.config = [];
+      this.formData = res.data[0];
+      console.log(  this.formData);
+      this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+  
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+  clear(table: Table) {
+    table.clear();
+  //  this.filter.nativeElement.value = '';
+  }
+  updateValue(key: any, value: any) {
+    console.log({key, value});
+  }
+
+
+  updateUser(raffle?: any) {
+    this.loading=true;
+    console.log(this.formData.id);
+    this.usersService.updateUser(this.formData.id, this.formData).subscribe(
+      response => {
+        this.loading=false;
+        this.visible1 = false;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario actualizado correctamente' });
+        this.usersService.eventUpdateUsers(true);
+        // Manejar la respuesta si es necesario
+        console.log(response);
+      },
+      error => {
+        this.loading=false;
+        this.visible1 = true;
+        this.messageService.add({ severity: 'eror', summary: 'Success', detail: error.message });
+        // Manejar el error si ocurre
+        console.error(error);
+      }
+    );
+  }
+
+  showEditpw(raffle: any) {
+    this.formDataChangepw = '';
+    this.loading = true;
+    console.log("llama", raffle.email);
+    this.Visiblepw = true;
+  
+    this.usersService.searchUser(raffle.email ).subscribe(
+      (res: any) => {
+        this.config = [];
+      this.formDataChangepw = res.data[0];
+      console.log(  this.formDataChangepw);
+      this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+
+
+  generatePassword() {
+    const length = 10; // longitud de la contraseña generada
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let password = "";
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset.charAt(randomIndex);
+    }
+   // this.formDataChangepw= password
+    this.generatedPassword = password;
+  }
+
+  updateUserPw(data?: any) {
+    this.loading=true;
+    //console.log(this.formData.id);
+    this.usersService.updateUserPw(this.formDataChangepw.id, this.generatedPassword).subscribe(
+      response => {
+        this.generatedPassword=null;
+        this.loading=false;
+        this.Visiblepw = false;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario actualizado correctamente' });
+        this.usersService.eventUpdateUsers(true);
+        // Manejar la respuesta si es necesario
+        console.log(response);
+      },
+      error => {
+        this.generatedPassword=null;
+        this.loading=false;
+        this.Visiblepw = true;
+        this.messageService.add({ severity: 'eror', summary: 'Success', detail: error.message });
+        // Manejar el error si ocurre
+        console.error(error);
+      }
+    );
+  }
+
+
+
 }

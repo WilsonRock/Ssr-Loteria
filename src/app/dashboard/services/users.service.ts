@@ -28,4 +28,43 @@ export class UsersService {
   createUser(data: any): Observable<any> {
     return this.http.post(`${ environment.api }/api/v1/usuario`, data, { headers: this.headers })
   }
-}
+
+
+  searchUser(params?: any): Observable<any> {    
+    const email = encodeURIComponent(params);  
+    const apiUrl = `${environment.api}/api/v1/searchU?search=${email}`;
+    return this.http.get(apiUrl, { headers: this.headers });
+   }
+
+
+   updateUser(userId: string, userData: any): Observable<any>  {
+      this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${ localStorage.getItem('token') }`
+      });
+ 
+      userData = {
+        nombres : userData.nombres,
+        apellidos : userData.apellidos,
+        documento : userData.documento,
+        telefono: userData.telefono,
+        email :userData.email,
+        active:userData.active,
+      }
+     
+     return this.http.patch(`${environment.api}/api/v1/users/${userId}`, userData, { headers: this.headers });
+   }
+
+   updateUserPw(userId: string, userData: any): Observable<any>  {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${ localStorage.getItem('token') }`
+    });
+
+    userData = {
+      password : userData,
+    }
+     return this.http.patch(`${environment.api}/api/v1/users/${userId}`, userData, { headers: this.headers });
+ }
+
+ }
