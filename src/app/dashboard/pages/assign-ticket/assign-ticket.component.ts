@@ -102,7 +102,6 @@ export class AssignTicketComponent implements OnInit {
   selectTicket(value: any) {
     if (value.status !== 'vendido') {
       value.checked = !value.checked;
-      console.log(value);//
       this.ticketSelect.push(value); // lo que hace es pushear al ticket select
     }
   }
@@ -110,7 +109,7 @@ export class AssignTicketComponent implements OnInit {
   reserve() {
     let body = {
         asignados: this.ticketSelect.filter((checked: any) => checked.checked === true),
-        vendedor_id: this.user_selected.id,
+        vendedor_id: this.user_selected,
         juego_id: this.game_id
     }
     this.gameService.reserveTickets(body).subscribe(res => {
@@ -152,7 +151,6 @@ export class AssignTicketComponent implements OnInit {
   }
   
   Organizar() {
-    console.log("organizador");
     // Ordena el arreglo de tarjetas para mostrar primero las seleccionadas
     this.tikets.sort((a: { checked: any; }, b: { checked: any; }) => {
       if (a.checked && !b.checked) {

@@ -43,6 +43,9 @@
           <th>
             Configuración
           </th>
+          <th>
+            Reporte
+          </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -50,8 +53,11 @@
           <td *ngFor="let col of columns">
             {{ rowData[col.field] }}
           </td>
-          <td class="flex justify-content-center">
+          <td>
             <button pButton label="" class="p-button-outlined mb-2" icon="pi pi-cog" (click)="showEditDialog(rowData)"></button>
+          </td>
+          <td>
+            <button pButton label="" class="p-button-outlined mb-2" icon="pi pi-file" (click)="goToReport(rowData)"></button>
           </td>
         </tr>
       </ng-template>

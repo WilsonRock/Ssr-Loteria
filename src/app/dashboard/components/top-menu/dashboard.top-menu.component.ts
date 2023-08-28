@@ -33,12 +33,13 @@ export class DashboardTopMenuComponent implements OnInit {
     this.gamesService.getGames().subscribe((res: any) => {
       res.data.forEach((element: any) => {
         this.games.push({
-          label: element.titulo,
+          label: JSON.parse(element.configuracion).name.value || element.titulo,
           icon: 'pi pi-fw pi-play',
           items: element.titulo == 'Rifa' ? [
             { label: 'Configuración',routerLink: [`/game/${ element.id }/config`]  },
             { label: 'Asignar Boletos',routerLink: [`/game/${ element.id }/assign-ticket`] },
-            { label: 'Sorteos',routerLink: [`/game/${ element.id }/raffles`] }
+            { label: 'Sorteos',routerLink: [`/game/${ element.id }/raffles`] },
+            { label: 'Buscador Números',routerLink: [`/game/${ element.id }/find-number`] }
             ] : 
             [
               { label: 'Configuración',routerLink: [`/game/${ element.id }/config`] },

@@ -6,7 +6,7 @@ import { HttpHeaders } from "@angular/common/http";
 
 export const environment = {
   production: false,
-  api: 'https://api-dev.mypagatodo.com',
+  api: 'http://loteria-back.test',//'https://api-dev.mypagatodo.com',
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${localStorage.getItem('token')}`
