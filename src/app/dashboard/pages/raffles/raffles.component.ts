@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RafflesService } from '../../services/raffles.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -21,7 +21,7 @@ export class RafflesComponent implements OnInit {
   game = '';
   config: any;
 
-  constructor(private rafflesService: RafflesService, private activatedrouter: ActivatedRoute) {}
+  constructor(private rafflesService: RafflesService, private activatedrouter: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.cols = [
@@ -48,11 +48,14 @@ export class RafflesComponent implements OnInit {
     this.rafflesService.getRafflesById(raffle.id).subscribe((res: any) => {
       this.config = [];
       this.visible1 = true;
-      console.log('res.data.configuracion', res.data.configuracion)
       Object.keys(JSON.parse(res.data?.configuracion)).forEach((element: any) => {
         this.config.push({key: element, ...JSON.parse(res.data?.configuracion)[element]})
       });
     })
+  }
+
+  goToReport(raffle: any) {
+    this.router.navigateByUrl(`raffle/${ raffle.id }/report`)
   }
 
   getRaffles() {
@@ -78,7 +81,6 @@ export class RafflesComponent implements OnInit {
       fecha_final: this.fecha_final,
       juego_id: this.game
     }
-    console.log('raffle', raffle)
 
     this.rafflesService.createRaffle(raffle).subscribe((res: any) => {
 

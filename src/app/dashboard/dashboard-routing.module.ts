@@ -7,6 +7,8 @@ import { ConfigComponent } from './pages/config/config.component';
 import { GamesComponent } from './pages/games/games.component';
 import { AssignTicketComponent } from './pages/assign-ticket/assign-ticket.component';
 import { RafflesComponent } from './pages/raffles/raffles.component';
+import { FindNumberComponent } from './pages/find-number/find-number.component';
+import { ReportTicketsComponent } from './pages/report-tickets/report-tickets.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
   {
     path: 'game/:id/raffles',
     component: RafflesComponent
+  },
+  {
+    path: 'game/:id/find-number',
+    component: FindNumberComponent
+  },
+  {
+    path: 'raffle/:id/report',
+    component: ReportTicketsComponent
   }
 ]
 

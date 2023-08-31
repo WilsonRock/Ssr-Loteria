@@ -35,4 +35,22 @@ export class RafflesService {
     
     return this.http.post(`${ environment.api }/api/v1/sorteo`, raffle, { headers: this.headers })
   }
+
+  findNumber(number: string) {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.get(`${ environment.api }/api/v1/buscar-numero?numero=${ number }`, { headers: this.headers })
+  }
+
+  reportTickets(id_raffle: string) {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.get(`${ environment.api }/api/v1/reporte-numeros`, { headers: this.headers, params: { id: id_raffle } })
+  }
 }

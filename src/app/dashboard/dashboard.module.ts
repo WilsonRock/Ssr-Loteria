@@ -40,6 +40,8 @@ import { GamesComponent } from './pages/games/games.component';
 import { AssignTicketComponent } from './pages/assign-ticket/assign-ticket.component';
 import { TableModule } from 'primeng/table';
 import { RafflesComponent } from './pages/raffles/raffles.component';
+import { FindNumberComponent } from './pages/find-number/find-number.component';
+import { ReportTicketsComponent } from './pages/report-tickets/report-tickets.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { RafflesComponent } from './pages/raffles/raffles.component';
     GamesComponent,
     AssignTicketComponent,
     RafflesComponent,
+    FindNumberComponent,
+    ReportTicketsComponent,
   ],
   imports: [
     SharedModule,

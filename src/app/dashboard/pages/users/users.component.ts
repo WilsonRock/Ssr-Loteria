@@ -97,14 +97,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   showEditDialog(raffle: any) {
     this.formData = '';
     this.loading = true;
-    console.log("llama", raffle.email);
     this.visible1 = true;
   
     this.usersService.searchUser(raffle.email ).subscribe(
       (res: any) => {
         this.config = [];
       this.formData = res.data[0];
-      console.log(  this.formData);
       this.loading = false;
       },
       (error) => {
@@ -127,7 +125,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   updateUser(raffle?: any) {
     this.loading=true;
-    console.log(this.formData.id);
     this.usersService.updateUser(this.formData.id, this.formData).subscribe(
       response => {
         this.loading=false;
@@ -135,7 +132,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario actualizado correctamente' });
         this.usersService.eventUpdateUsers(true);
         // Manejar la respuesta si es necesario
-        console.log(response);
       },
       error => {
         this.loading=false;
@@ -150,14 +146,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   showEditpw(raffle: any) {
     this.formDataChangepw = '';
     this.loading = true;
-    console.log("llama", raffle.email);
     this.Visiblepw = true;
   
     this.usersService.searchUser(raffle.email ).subscribe(
       (res: any) => {
         this.config = [];
       this.formDataChangepw = res.data[0];
-      console.log(  this.formDataChangepw);
       this.loading = false;
       },
       (error) => {
@@ -182,7 +176,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   updateUserPw(data?: any) {
     this.loading=true;
-    //console.log(this.formData.id);
     this.usersService.updateUserPw(this.formDataChangepw.id, this.generatedPassword).subscribe(
       response => {
         this.generatedPassword=null;
@@ -191,7 +184,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario actualizado correctamente' });
         this.usersService.eventUpdateUsers(true);
         // Manejar la respuesta si es necesario
-        console.log(response);
       },
       error => {
         this.generatedPassword=null;
