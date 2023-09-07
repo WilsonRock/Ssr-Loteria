@@ -22,11 +22,11 @@ export class ReportTicketsComponent implements OnInit {
 
   ngOnInit(): void {
     this.cols = [
-      /* { field: 'id', header: 'Id' }, */
-      { field: 'numbers', header: 'Números Boleto' },
-      { field: 'sorprise', header: 'Número Sorpresa' },
-      { field: 'seller', header: 'Vendedor' },
-      { field: 'status', header: 'Estado' }
+        //{ field: 'userId', header: 'Vendedor' },
+        { field: 'name', header: 'Nombre' },
+        { field: 'asing', header: 'Asignados' },
+        { field: 'count', header: 'Cantidad total Vendidos' },
+        { field: 'money', header: 'Total a pagar' },
     ];
 
     this.activatedRoute.params.subscribe((params: any) => {
@@ -40,11 +40,11 @@ export class ReportTicketsComponent implements OnInit {
     this.rafflesService.reportTickets(this.raffle).subscribe((res: any) => {
       res.data.forEach((element: any) => {
         this.tickets.push({
-          id: element.id,
-          numbers: element.numeros,
-          sorprise: element.sorpresa,
-          seller: element.user == null ? 'sin asignar' : element.user.firstName + ' ' + element.user.lastName,
-          status: element.status == null ? 'sin asignar' : element.status,
+         // id: element.userName,
+          name: element.userName,
+          asing: element.assigned_count,
+          count: element.sold_count ,
+          money: element.money
         })
       });
 
