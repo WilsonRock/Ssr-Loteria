@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dashboard-loteria",
+            "outputPath": "dist/dashboard-loteria/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -97,6 +97,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/dashboard-loteria/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "dashboard-loteria:build:development",
+              "serverTarget": "dashboard-loteria:server:development"
+            },
+            "production": {
+              "browserTarget": "dashboard-loteria:build:production",
+              "serverTarget": "dashboard-loteria:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dashboard-loteria:build:production",
+              "serverTarget": "dashboard-loteria:server:production"
+            },
+            "development": {
+              "browserTarget": "dashboard-loteria:build:development",
+              "serverTarget": "dashboard-loteria:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

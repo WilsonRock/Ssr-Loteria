@@ -39,7 +39,7 @@ import { DashboardsRoutingModule } from './dashboard/dashboard-routing.module';
     AppRoutingModule,
     DashboardModule,
     BrowserAnimationsModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     SharedModule,
     ButtonModule,
